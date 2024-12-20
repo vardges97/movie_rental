@@ -9,13 +9,13 @@ router = APIRouter()
 
 rentals_db = []
 
-@router.get("/rentals")
+@router.get("/")
 def get_rental_history(current_user: Dict = Depends(get_current_user)):
     user_rentals = [rental for rental in rentals_db if rental.user == current_user["username"]]
     return user_rentals
 
 
-@router.post("/rentals")
+@router.post("/")
 def rent_movie(rental: Rental, current_user = Depends(get_current_user)):
     rentals_db.append(rental)
     return {"message": "Movie rented"}
